@@ -21,7 +21,38 @@ namespace Lopushok.Entities
             this.ProductMaterial = new HashSet<ProductMaterial>();
             this.ProductSale = new HashSet<ProductSale>();
         }
-    
+
+        public string Materials
+        {
+            get
+            {
+                string materials = null;
+
+                foreach (var item in ProductMaterial)
+                {
+                    materials += item.Material.Title + ", ";
+                }
+
+                if (materials != null)
+                    return materials.Remove(materials.Length - 2, 2);
+                else
+                    return "Не имеются";
+            }
+        }
+        public decimal Cost
+        {
+            get
+            {
+                decimal cost = 0;
+
+                foreach (var item in ProductMaterial)
+                {
+                    cost += item.Material.Cost * (int)item.Count;
+                }
+
+                return cost;
+            }
+        }
         public int ID { get; set; }
         public string Title { get; set; }
         public Nullable<int> ProductTypeID { get; set; }

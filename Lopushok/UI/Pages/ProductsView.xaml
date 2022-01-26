@@ -82,11 +82,11 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         
-                        <TextBlock Text="{Binding Product.ProductType.Title, StringFormat=Тип: {0}}"
+                        <TextBlock Text="{Binding ProductType.Title, StringFormat=Тип: {0}}"
                                    Grid.Column="1"
                                    Grid.Row="1"/>
                         
-                        <TextBlock Text="{Binding Product.Image, StringFormat=..{0}}"
+                        <TextBlock Text="{Binding Image, StringFormat=..{0}}"
                                    x:Name="imgPath"
                                    Visibility="Collapsed"/>
 
@@ -96,22 +96,23 @@
                                Width="110"
                                Stretch="Uniform"/>
                         
-                        <TextBlock Text="{Binding Product.Title}" 
+                        <TextBlock Text="{Binding Title}" 
                                    Grid.Column="1" 
                                    HorizontalAlignment="Left"/>
                         
-                        <TextBlock Text="{Binding Product.ArticleNumber, StringFormat=Артикул: {0}}" 
+                        <TextBlock Text="{Binding ArticleNumber, StringFormat=Артикул: {0}}" 
                                    Grid.Column="1" 
                                    Grid.Row="1"
                                    Margin="200 0 0 0"
                                    HorizontalAlignment="Left"/>
                         
-                        <TextBlock Text="{Binding Material.Title, StringFormat=Материал: {0}}" 
+                        <TextBlock Text="{Binding Materials, StringFormat=Материал: {0}}" 
                                    Grid.Column="1" 
                                    Grid.Row="2" 
-                                   HorizontalAlignment="Left"/>
+                                   HorizontalAlignment="Left"
+                                   TextWrapping="Wrap"/>
                         
-                        <TextBlock Text="{Binding Material.Cost, StringFormat=Цена: {0:00} руб.}" 
+                        <TextBlock Text="{Binding Cost, StringFormat=Цена: {0:00} руб.}" 
                                    Grid.Column="2" 
                                    Grid.Row="2" 
                                    HorizontalAlignment="Right"/>

@@ -22,7 +22,7 @@ namespace Lopushok.UI.Pages
     /// </summary>
     public partial class ProductsView : Page
     {
-        public List<ProductMaterial> ItemsProductMaterial { get { return Transition.Context.ProductMaterial.ToList(); } }
+        public List<Product> ItemsProductMaterial { get { return Transition.Context.Product.ToList(); } }
         public ProductsView()
         {
             InitializeComponent();
@@ -40,18 +40,45 @@ namespace Lopushok.UI.Pages
 
             listViewProducts.ItemsSource = ItemsProductMaterial;
         }
+        private void addBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Transition.mainFrame.Navigate(new AddEditPage(null));
+            UpdateData();
+        }
 
+        private void editBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Transition.mainFrame.Navigate(new AddEditPage(listViewProducts.SelectedItem as Product));
+            UpdateData();
+        }
+
+        private void deleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var itemToDelete = listViewProducts.SelectedItem as Product;
+            if (itemToDelete != null)
+            {
+                if (MessageBox.Show($"Удалить продукт №{itemToDelete.ID}", "Удаление продукта", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    Transition.Context.Product.Remove(itemToDelete);
+                    Transition.Context.SaveChanges();
+                    MessageBox.Show("Данные удалены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            UpdateData();
+
+        }
+        #region Сортировка
         public void UpdateData()
         {
-            var updatedData = Transition.Context.ProductMaterial.ToList();
+            var updatedData = Transition.Context.Product.ToList();
             if (searchTxt.Text != "Поиск..." && searchTxt.Text != "")
             {
-                updatedData = updatedData.Where(x => x.Product.Title.ToLower().Contains(searchTxt.Text.ToLower()) ||
-                                                 x.Material.Title.ToLower().Contains(searchTxt.Text.ToLower())).ToList();
+                updatedData = updatedData.Where(x => x.Title.ToLower().Contains(searchTxt.Text.ToLower()) ||
+                                                 x.Description.ToLower().Contains(searchTxt.Text.ToLower())).ToList();
             }
             if (filterByCombox.SelectedIndex > 0)
             {
-                updatedData = updatedData.Where(p => p.Product.ProductType.Title == (filterByCombox.SelectedItem as ProductType).Title.ToString()).ToList();
+                updatedData = updatedData.Where(p => p.ProductType.Title == (filterByCombox.SelectedItem as ProductType).Title.ToString()).ToList();
             }
             if (sortByCombox.SelectedIndex > 0)
             {
@@ -61,11 +88,11 @@ namespace Lopushok.UI.Pages
                         {
                             if (ascDescCheck.IsChecked == false)
                             {
-                                updatedData = updatedData.OrderBy(x => x.Material.Cost).ToList();
+                                updatedData = updatedData.OrderBy(x => x.Cost).ToList();
                             }
                             else
                             {
-                                updatedData = updatedData.OrderByDescending(x => x.Material.Cost).ToList();
+                                updatedData = updatedData.OrderByDescending(x => x.Cost).ToList();
                             }
 
                             break;
@@ -74,11 +101,11 @@ namespace Lopushok.UI.Pages
                         {
                             if (ascDescCheck.IsChecked == false)
                             {
-                                updatedData = updatedData.OrderBy(x => x.Product.Title).ToList();
+                                updatedData = updatedData.OrderBy(x => x.Title).ToList();
                             }
                             else
                             {
-                                updatedData = updatedData.OrderByDescending(x => x.Product.Title).ToList();
+                                updatedData = updatedData.OrderByDescending(x => x.Title).ToList();
                             }
                             break;
                         }
@@ -89,21 +116,6 @@ namespace Lopushok.UI.Pages
             listViewProducts.ItemsSource = updatedData;
         }
 
-        private void addBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Transition.mainFrame.Navigate(new AddEditPage(null));
-            UpdateData();
-        }
-
-        private void editBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void deleteBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -119,7 +131,7 @@ namespace Lopushok.UI.Pages
 
         private void searchTxt_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (searchTxt.Text != "Поиск..." && searchTxt.Text != "")
+            if (searchTxt.Text != "Поиск...")
             {
                 UpdateData();
             }
@@ -144,7 +156,7 @@ namespace Lopushok.UI.Pages
         {
             UpdateData();
         }
-
+        #endregion
         private void listViewProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             editBtn.Visibility = Visibility.Visible;

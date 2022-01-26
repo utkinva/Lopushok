@@ -62,7 +62,7 @@ namespace Lopushok.UI.Pages
             try
             {
                 Transition.Context.SaveChanges();
-                MessageBox.Show("Инфорация сохранена", "Успех", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Инфорация сохранена", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                 Transition.mainFrame.GoBack();
             }
             catch (Exception ex)
