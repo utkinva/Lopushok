@@ -119,6 +119,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Utilities\Transition.cs" />
+    <Compile Include="Utilities\ViewPages.cs" />
     <Page Include="UI\Pages\ProductsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -184,6 +185,33 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Resource Include="UI\products\picture.png" />
+    <Resource Include="UI\products\paper_0.jpeg" />
+    <Resource Include="UI\products\paper_1.jpeg" />
+    <Resource Include="UI\products\paper_10.jpeg" />
+    <Resource Include="UI\products\paper_11.jpeg" />
+    <Resource Include="UI\products\paper_12.jpeg" />
+    <Resource Include="UI\products\paper_13.jpeg" />
+    <Resource Include="UI\products\paper_14.jpeg" />
+    <Resource Include="UI\products\paper_15.jpeg" />
+    <Resource Include="UI\products\paper_16.jpeg" />
+    <Resource Include="UI\products\paper_17.jpeg" />
+    <Resource Include="UI\products\paper_18.jpeg" />
+    <Resource Include="UI\products\paper_19.jpeg" />
+    <Resource Include="UI\products\paper_2.jpeg" />
+    <Resource Include="UI\products\paper_20.jpeg" />
+    <Resource Include="UI\products\paper_21.jpeg" />
+    <Resource Include="UI\products\paper_22.jpeg" />
+    <Resource Include="UI\products\paper_23.jpeg" />
+    <Resource Include="UI\products\paper_24.jpeg" />
+    <Resource Include="UI\products\paper_25.jpeg" />
+    <Resource Include="UI\products\paper_3.jpeg" />
+    <Resource Include="UI\products\paper_4.jpeg" />
+    <Resource Include="UI\products\paper_5.jpeg" />
+    <Resource Include="UI\products\paper_6.jpeg" />
+    <Resource Include="UI\products\paper_7.jpeg" />
+    <Resource Include="UI\products\paper_8.jpeg" />
+    <Resource Include="UI\products\paper_9.jpeg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\Logo\Лопушок.ico" />

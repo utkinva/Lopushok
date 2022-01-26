@@ -3,25 +3,139 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Lopushok.UI.Pages"
+      xmlns:local="clr-namespace:Lopushok.UI.Pages" xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
       Title="ProductsView">
-
+    <Page.Resources>
+        <sys:String x:Key="NullImage">
+            pack://application:,,,/UI/products/picture.png
+        </sys:String>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0"/>
-        <Button Grid.Row="2"/>
-        <ListView Grid.Row="1" x:Name="listViewProducts">
+
+        <Grid Grid.Row="0" Width="Auto">
+            <StackPanel Background="#CEFFF9"/>
+            <ComboBox Style="{StaticResource styleViewProductsCombox}"
+                      x:Name="filterByCombox"
+                      DisplayMemberPath="Title"
+                      SelectedValuePath="ID"
+                      HorizontalAlignment="Right"
+                      Margin="0 0 40 0"/>
+
+            <ComboBox Style="{StaticResource styleViewProductsCombox}"
+                      x:Name="sortByCombox"
+                      HorizontalAlignment="Right"
+                      Margin="0 0 310 0"/>
+
+            <CheckBox Content="По убыванию"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Center"
+                      Margin="0 0 200 0"
+                      FontFamily="Gabriola"
+                      FontSize="18"
+                      VerticalContentAlignment="Center"/>
+            <Border Background="Transparent" 
+                    BorderBrush="Gray" 
+                    BorderThickness="1" 
+                    Width="270" 
+                    Height="30"
+                    HorizontalAlignment="Left"
+                    Margin="20 0 0 0">
+                <TextBox Style="{StaticResource styleViewProductsTxtBx}"
+                           Width="Auto"
+                           Height="Auto"/>
+            </Border>
+
+        </Grid>
+        <ListView Grid.Row="1" 
+                  x:Name="listViewProducts"
+                  FontFamily="Gabriola"
+                  Margin="5"
+                  FontSize="20"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Title}"/>
+                    <Grid Grid.Row="1" Height="150">
+                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="470"/>
+                            <ColumnDefinition Width="190*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <TextBlock Text="{Binding Product.ProductType.Title, StringFormat=Тип: {0}}"
+                                   Grid.Column="1"
+                                   Grid.Row="1"/>
+                        
+                        <TextBlock Text="{Binding Product.Image, StringFormat=..{0}}"
+                                   x:Name="imgPath"
+                                   Visibility="Collapsed"/>
+
+                        <Image Source="{Binding Text, ElementName=imgPath, FallbackValue={StaticResource NullImage}}"
+                               Grid.Column="0"
+                               Grid.RowSpan="3"
+                               Width="110"
+                               Stretch="Uniform"/>
+                        
+                        <TextBlock Text="{Binding Product.Title}" 
+                                   Grid.Column="1" 
+                                   HorizontalAlignment="Left"/>
+                        
+                        <TextBlock Text="{Binding Product.ArticleNumber, StringFormat=Артикул: {0}}" 
+                                   Grid.Column="1" 
+                                   Grid.Row="1"
+                                   Margin="100 0 0 0"
+                                   HorizontalAlignment="Left"/>
+                        
+                        <TextBlock Text="{Binding Material.Title, StringFormat=Материал: {0}}" 
+                                   Grid.Column="1" 
+                                   Grid.Row="2" 
+                                   HorizontalAlignment="Left"/>
+                        
+                        <TextBlock Text="{Binding Material.Cost, StringFormat=Цена: {0:00} руб.}" 
+                                   Grid.Column="2" 
+                                   Grid.Row="2" 
+                                   HorizontalAlignment="Right"/>
+                        
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Grid Width="Auto" Grid.Row="2">
+            <StackPanel Background="#CEFFF9"/>
+            <Button Content="Добавить"
+                    x:Name="addBtn"
+                    Click="addBtn_Click"
+                    Style="{StaticResource styleViewProductsBtn}"
+                    HorizontalAlignment="Left"
+                    Margin="20 0 0 0"/>
+
+            <Button Content="Изменить"
+                    x:Name="editBtn"
+                    Click="editBtn_Click"
+                    Style="{StaticResource styleViewProductsBtn}"
+                    HorizontalAlignment="Left"
+                    Margin="160 0 0 0"/>
+
+            <Button Content="Удалить"
+                    x:Name="deleteBtn"
+                    Click="deleteBtn_Click"
+                    Style="{StaticResource styleViewProductsBtn}"
+                    HorizontalAlignment="Right"
+                    Margin="0 0 20 0"/>
+        </Grid>
+
     </Grid>
 </Page>

@@ -6,13 +6,26 @@
         xmlns:local="clr-namespace:Lopushok"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1000" MinHeight="600" MinWidth="800">
-    <Grid>
+    <Grid Background="#FFFFFF">
         <Grid.RowDefinitions>
-            <RowDefinition Height="90"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60"/>
-        <Image HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Width="Auto" Source="/UI/Logo/Лопушок.png"/>
-        <Frame Grid.Row="1" NavigationUIVisibility="Hidden" Name="MainFrame"/>
+        <StackPanel Background="#CEFFF9"/>
+        <TextBlock Grid.Row="0"
+                   Style="{StaticResource styleMainText}"
+                   Text="Лопушок"
+                   VerticalAlignment="Top"/>
+
+        <Image HorizontalAlignment="Left" 
+               VerticalAlignment="Top" 
+               Grid.Row="0" Width="80"
+               Stretch="Uniform"
+               Source="/UI/Logo/Лопушок.png"/>
+        
+        <Frame Grid.Row="1" 
+               NavigationUIVisibility="Hidden" 
+               Name="MainFrame"/>
+
     </Grid>
 </Window>
