@@ -91,7 +91,8 @@ namespace Lopushok.UI.Pages
 
         private void addBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Transition.mainFrame.Navigate(new AddEditPage(null));
+            UpdateData();
         }
 
         private void editBtn_Click(object sender, RoutedEventArgs e)
@@ -142,6 +143,12 @@ namespace Lopushok.UI.Pages
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             UpdateData();
+        }
+
+        private void listViewProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            editBtn.Visibility = Visibility.Visible;
+            deleteBtn.Visibility = Visibility.Visible;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Lopushok.Utilities
 {
     internal class Transition
     {
-        public static Frame mainFrame;
+        public static Frame mainFrame { get; set; }
         private static LopushokEntities _context { get; set; }
         public static LopushokEntities Context
         {

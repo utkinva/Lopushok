@@ -65,7 +65,7 @@
                   FontFamily="Gabriola"
                   Margin="5"
                   FontSize="20"
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="listViewProducts_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Grid.Row="1" Height="150">
@@ -134,14 +134,16 @@
                     Click="editBtn_Click"
                     Style="{StaticResource styleViewProductsBtn}"
                     HorizontalAlignment="Left"
-                    Margin="160 0 0 0"/>
+                    Margin="160 0 0 0"
+                    Visibility="Hidden"/>
 
             <Button Content="Удалить"
                     x:Name="deleteBtn"
                     Click="deleteBtn_Click"
                     Style="{StaticResource styleViewProductsBtn}"
                     HorizontalAlignment="Right"
-                    Margin="0 0 20 0"/>
+                    Margin="0 0 20 0"
+                    Visibility="Hidden"/>
         </Grid>
 
     </Grid>
